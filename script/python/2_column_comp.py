@@ -4,7 +4,6 @@ import os
 
 # Function to read files and merge data
 def merge_files(file1_path, file2_path, output_path, a, b):
-    # Create a dictionary to store the second and third column values of file2
     file2_data = {}
     
     with open(file2_path, 'r') as file2:
@@ -28,19 +27,19 @@ def merge_files(file1_path, file2_path, output_path, a, b):
                 else:
                     output_file.write(f"{line.strip()} \t \n")
                     
-# Specify file paths
+
 file1_path = 'Medicago_truncatula_Blastp_longIsoforme'
 file2_path = 'Medicago_truncatula_protein_length'
 file3_path = 'temp'
 output_file= 'output.txt'
 
-# Call the functions to merge the data
+
 merge_files(file1_path, file2_path, file3_path, 1,0)
 merge_files(file3_path, file2_path, output_file, 2,1)
 
 
 
-def filter_hits2(file1_path, output_path):
+def filter_hits(file1_path, output_path):
     mydict = {}
 
     # Read file1 and store bitscore values in a dictionary for both directions
@@ -49,7 +48,7 @@ def filter_hits2(file1_path, output_path):
             columns = line.strip().split()
             key1 = columns[0]
             key2 = columns[1]
-            bitscore = float(columns[11])  # Convert bitscore to float
+            bitscore = float(columns[11])
 
             # Consider both directions: (key1, key2) and (key2, key1)
             mydict[(key1, key2)] = max(mydict.get((key1, key2), -float('inf')), bitscore)
@@ -68,8 +67,8 @@ def filter_hits2(file1_path, output_path):
             if float(columns[11]) == max_bitscore:  # Only write if it's the maximum bitscore
                 output_file.write(f"{line.strip()} \t \n")
 	    
-# Call the filter_hits function
-filter_hits2('output.txt', 'filtered_data.txt')
+
+filter_hits('output.txt', 'filtered_data.txt')
 
 os.remove(file3_path)
 os.remove("output.txt")
