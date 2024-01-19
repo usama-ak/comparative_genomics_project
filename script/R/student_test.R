@@ -1,5 +1,4 @@
 library(data.table)
-library(mclust)
 
 # Read data
 dS_values <- fread("dS_values_distances.txt")
