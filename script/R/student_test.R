@@ -1,7 +1,8 @@
 library(data.table)
+library(mclust)
 
 # Read data
-dS_values <- fread("dS_values_distances.txt")
+dS_values <- fread("dS_values_final")
 dS_values_filtered <- dS_values[dS_values$V3 < 3, ]
 ks_values <- as.numeric(dS_values_filtered$V3)
 
