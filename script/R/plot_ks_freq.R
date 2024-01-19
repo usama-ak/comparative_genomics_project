@@ -2,7 +2,7 @@ library(data.table)
 library(mclust)
 
 # Read data
-dS_values <- fread("dS_values_distances.txt")
+dS_values <- fread("dS_values_final")
 dS_values_filtered <- dS_values[dS_values$V3 < 3, ]
 ks_values <- as.numeric(dS_values_filtered$V3)
 
@@ -16,6 +16,12 @@ hist_obj <- hist(ks_values, breaks = 150, main = "Distribution of Ks Values",
 
 # Add GMM components to the plot
 lines(density(ks_values), col = "blue", lty = 2, lwd = 2)
+
+# Extract the means and variances of the components
+mean1 <- gmm_model$parameters$mean[1]
+mean2 <- gmm_model$parameters$mean[2]
+variance1 <- gmm_model$parameters$variance$sigmasq[1]
+variance2 <- gmm_model$parameters$variance$sigmasq[2]
 
 # Plot the density curve with the adjusted bandwidth
 lines(density(ks_values, bw = sqrt(as.numeric(variance1))), col = "red", lty = 2, lwd = 2)
