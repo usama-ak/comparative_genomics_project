@@ -1,13 +1,9 @@
 #!/usr/bin/python3
-
-
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Input file paths
 file_paths = ['mcl_output_30_50', 'mcl_output_30_80', 'mcl_output_50_50', 'mcl_output_50_80']
 
-# Create subplots
 fig, axes = plt.subplots(nrows=2, ncols=2, figsize=(12, 8))
 axes = axes.flatten()
 
@@ -29,7 +25,6 @@ for i, (file_path, ax) in enumerate(zip(file_paths, axes), start=1):
         ax.set_xlabel('Family Size')
         ax.set_ylabel('Frequency')
 
-# Adjust layout and display
 plt.tight_layout()
 plt.show()
 
